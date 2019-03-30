@@ -1,8 +1,9 @@
-FROM golang:1.12.0-alpine AS first-env
+FROM golang:1.12.0-stretch AS first-env
 
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache python bash git doxygen make cmake g++
+RUN apt-get update && \
+    apt-get upgrade && \
+    apt-get install -y python bash git doxygen make cmake g++ && \
+    apt-get clean
 
 # Install libs for Japanese text
 RUN go get -u github.com/ikawaha/kagome;:
@@ -23,10 +24,11 @@ RUN find . -type d -name ".git" | xargs rm -rf
 
 
 # Use multi stage build for reducing image size.
-FROM golang:1.12.0-alpine
+FROM golang:1.12.0-stretch
 
-RUN apk update && \
-    apk upgrade
+RUN apt-get update && \
+    apt-get upgrade && \
+    apt-get clean
 
 COPY --from=first-env /go/src /go/src
 COPY --from=first-env /usr/bin /usr/bin
