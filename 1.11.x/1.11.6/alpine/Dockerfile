@@ -26,7 +26,7 @@ RUN find . -type d -name ".git" | xargs rm -rf
 
 
 # Use multi stage build for reducing image size.
-FROM golang:1.12.1-alpine
+FROM golang:1.11.6-alpine
 
 RUN apk update && \
     apk upgrade
