@@ -19,6 +19,9 @@ RUN git clone https://github.com/BYVoid/OpenCC --depth 1 && \
 
 RUN go get -u github.com/stevenyao/go-opencc;:
 
+# Install NLP lib by james-bowman
+RUN go get -u github.com/james-bowman/nlp;:
+
 # clean .git
 RUN find . -type d -name ".git" | xargs rm -rf
 
