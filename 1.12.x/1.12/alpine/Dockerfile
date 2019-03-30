@@ -1,4 +1,4 @@
-FROM golang:1.12-alpine AS first-env
+FROM golang:1.12.0-alpine AS first-env
 
 RUN apk update && \
     apk upgrade && \
@@ -23,7 +23,7 @@ RUN find . -type d -name ".git" | xargs rm -rf
 
 
 # Use multi stage build for reducing image size.
-FROM golang:1.12.1-alpine
+FROM golang:1.12.0-alpine
 
 RUN apk update && \
     apk upgrade
