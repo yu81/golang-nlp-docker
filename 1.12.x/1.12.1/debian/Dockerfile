@@ -1,7 +1,7 @@
 FROM golang:1.12.1-stretch AS first-env
 
 RUN apt-get update && \
-    apt-get upgrade && \
+    apt-get upgrade -y && \
     apt-get install -y python bash git doxygen make cmake g++ && \
     apt-get clean
 
@@ -10,7 +10,7 @@ RUN go get -u github.com/ikawaha/kagome;:
 RUN go get -u github.com/evalphobia/go-jp-text-ripper;:
 
 # Install OpenCC for Chinese text.
-RUN git clone https://github.com/BYVoid/OpenCC --depth 1 && \
+RUN git clone https://github.com/BYVoid/OpenCC && \
     cd OpenCC && \
     git checkout 33d57bd86c5da06f00559916cd64718e6c3961c6 && \
     make install && \
@@ -30,7 +30,7 @@ RUN find . -type d -name ".git" | xargs rm -rf
 FROM golang:1.12.1-stretch
 
 RUN apt-get update && \
-    apt-get upgrade && \
+    apt-get upgrade -y && \
     apt-get clean
 
 COPY --from=first-env /go/src /go/src

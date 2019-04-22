@@ -9,7 +9,7 @@ RUN go get -u github.com/ikawaha/kagome;:
 RUN go get -u github.com/evalphobia/go-jp-text-ripper;:
 
 # Install OpenCC for Chinese text.
-RUN git clone https://github.com/BYVoid/OpenCC --depth 1 && \
+RUN git clone https://github.com/BYVoid/OpenCC && \
     cd OpenCC && \
     git checkout 33d57bd86c5da06f00559916cd64718e6c3961c6 && \
     make install && \
