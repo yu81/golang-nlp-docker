@@ -1,7 +1,7 @@
 FROM golang:1.11.6-stretch AS first-env
 
 RUN apt-get update && \
-    apt-get upgrade && \
+    apt-get upgrade -y && \
     apt-get install -y python bash git doxygen make cmake g++ && \
     apt-get clean
 
@@ -30,7 +30,7 @@ RUN find . -type d -name ".git" | xargs rm -rf
 FROM golang:1.11.6-stretch
 
 RUN apt-get update && \
-    apt-get upgrade && \
+    apt-get upgrade -y && \
     apt-get clean
 
 COPY --from=first-env /go/src /go/src
